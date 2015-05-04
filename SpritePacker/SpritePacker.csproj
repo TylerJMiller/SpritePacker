@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6B944B5F-10F3-431A-81A8-6A8EFD263820}</ProjectGuid>
+    <ProjectGuid>{D05FE78E-60B7-42D8-ABC2-E57326A73EB7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SpritePacker</RootNamespace>

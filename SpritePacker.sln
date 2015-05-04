@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpritePacker", "SpritePacker.csproj", "{6B944B5F-10F3-431A-81A8-6A8EFD263820}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpritePacker", "SpritePacker\SpritePacker.csproj", "{D05FE78E-60B7-42D8-ABC2-E57326A73EB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6B944B5F-10F3-431A-81A8-6A8EFD263820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B944B5F-10F3-431A-81A8-6A8EFD263820}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B944B5F-10F3-431A-81A8-6A8EFD263820}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B944B5F-10F3-431A-81A8-6A8EFD263820}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D05FE78E-60B7-42D8-ABC2-E57326A73EB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D05FE78E-60B7-42D8-ABC2-E57326A73EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D05FE78E-60B7-42D8-ABC2-E57326A73EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D05FE78E-60B7-42D8-ABC2-E57326A73EB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
