@@ -20,17 +20,31 @@ namespace SpritePacker
 		public SpriteSheet(Canvas tCanvas)
 		{
 			mCanvas = tCanvas;
+			mCanvas.Width = 500;
+			mCanvas.Height = 500;
 			mCanvasImages = new List<CanvasImage>();
 		}
 
 		public void AddImage(string tImageSource)
 		{
+
 			Image tImage = new Image();
 			tImage.Source = new BitmapImage(new Uri(tImageSource));
+			if (mDrawX + (int)tImage.Source.Width > mCanvas.Width)
+			{
+				mDrawX = 0;
+				mDrawY += (int)tImage.Source.Height;
+			}
+			if (mDrawY + (int)tImage.Source.Height > mCanvas.Height)
+			{
+				Console.WriteLine("Failed to add image: Canvas is full");
+				return;
+			}
 			Canvas.SetTop(tImage, mDrawY);
 			Canvas.SetLeft(tImage, mDrawX);
 			mCanvas.Children.Add(tImage);
-			mCanvasImages.Add(new CanvasImage(tImage.Width, tImage.Height, mDrawX, mDrawY));
+			mCanvasImages.Add(new CanvasImage(tImage.Source.Width, tImage.Source.Height, mDrawX, mDrawY));
+			Console.WriteLine("Image Added");
 			mDrawX += (int)tImage.Source.Width;
 			//mDrawY += (int)tImage.Source.Height;
 		}
