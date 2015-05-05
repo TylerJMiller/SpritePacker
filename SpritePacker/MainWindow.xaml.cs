@@ -16,9 +16,6 @@ using Microsoft.Win32;
 
 namespace SpritePacker
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
 	public partial class MainWindow : Window
 	{
 		SpriteSheet CanvasManager;
@@ -27,7 +24,6 @@ namespace SpritePacker
 			InitializeComponent();
 			CanvasManager = new SpriteSheet(ViewCanvas);
 		}
-
 		private void ImportFile_Click(object sender, RoutedEventArgs e)
 		{
 			OpenFileDialog opf = new OpenFileDialog();
@@ -45,15 +41,35 @@ namespace SpritePacker
 				}
 				catch (System.NotSupportedException FUCKTHEUSER)
 				{
-					Console.WriteLine("UNHANDLED EXCEPTION: NOT A VALID IMAGE FILE: ", FUCKTHEUSER.Message);
+					Console.WriteLine("UNHANDLED BUTTS: NOT A VALID IMAGE FILE: ", FUCKTHEUSER.Message);
 				}
 			}
 		}
 		
 
+
 		private void MoveToCanvas_Click(object sender, RoutedEventArgs e)
 		{
-			CanvasManager.AddImage(PreviewImage.Source.ToString(), 0, 0);
+			if (null != PreviewImage.Source)
+				CanvasManager.AddImage(PreviewImage.Source.ToString());
+			else
+				Console.WriteLine("ERROR: IMAGE SELECT IS NULL");
+		}
+
+		private void SaveFile_Click(object sender, RoutedEventArgs e)
+		{
+			SaveFileDialog sfd = new SaveFileDialog();
+			sfd.InitialDirectory = "C:\\Users\\tyler.miller\\Desktop" + "\\TESTFOLDER";
+			sfd.Filter = "BITMAP IMAGE | *.bmp|PNG IMAGE | *.png";
+			sfd.DefaultExt = "bmp";
+
+			bool? userClickedSave = sfd.ShowDialog();
+
+			if (userClickedSave == true)
+			{
+				CanvasManager.ExportCanvas(sfd.FileName);
+			}
+
 		}
 	}
 }

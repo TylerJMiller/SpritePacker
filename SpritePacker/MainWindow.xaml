@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="900" Width="1200">
 	<Grid>
-		<Canvas x:Name="ViewCanvas" HorizontalAlignment="Left" Height="600" Margin="10,10,0,0" VerticalAlignment="Top" Width="700" Background="Cyan"/>
-		<Image x:Name="PreviewImage" HorizontalAlignment="Left" Height="150" Margin="776,106,0,0" VerticalAlignment="Top" Width="150"/>
-		<Button x:Name="MoveToCanvas" Content="Add To Canvas" HorizontalAlignment="Left" Margin="776,288,0,0" VerticalAlignment="Top" Width="150" Click="MoveToCanvas_Click"/>
-		<Button x:Name="ImportFile" Content="Import File..." HorizontalAlignment="Left" Margin="776,261,0,0" VerticalAlignment="Top" Width="150" Click="ImportFile_Click"/>
+		<Canvas x:Name="ViewCanvas" HorizontalAlignment="Left" Height="600" VerticalAlignment="Top" Width="700" Background="Cyan"/>
+		<Image x:Name="PreviewImage" HorizontalAlignment="Left" Height="150" Margin="750,100,0,0" VerticalAlignment="Top" Width="150"/>
+		<Button x:Name="MoveToCanvas" Content="Add To Canvas" HorizontalAlignment="Left" Margin="750,282,0,0" VerticalAlignment="Top" Width="150" Click="MoveToCanvas_Click"/>
+		<Button x:Name="ImportFile" Content="Import File..." HorizontalAlignment="Left" Margin="750,255,0,0" VerticalAlignment="Top" Width="150" Click="ImportFile_Click"/>
+		<Button x:Name="SaveFile" Content="Save as..." HorizontalAlignment="Left" Margin="750,309,0,0" VerticalAlignment="Top" Width="150" Click="SaveFile_Click"/>
 
 	</Grid>
 </Window>
