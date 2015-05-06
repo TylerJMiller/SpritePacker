@@ -40,7 +40,8 @@ namespace SpritePacker
 		private void ImportFile_Click(object sender, RoutedEventArgs e)
 		{
 			OpenFileDialog opf = new OpenFileDialog();
-			opf.InitialDirectory = "C:\\Users\\tyler.miller\\Desktop" + "\\TESTFOLDER";
+			
+			opf.InitialDirectory = Environment.CurrentDirectory;
 			opf.Filter = "ALL FILES (*.*)|*.*|PNG IMAGES (*.png)|*.png|BITMAP IMAGES (*.bmp)|*.bmp|COMPUSERVE GIF (*.gif)|*.gif";
 			opf.FilterIndex = 1;
 			opf.RestoreDirectory = true;
@@ -76,7 +77,7 @@ namespace SpritePacker
 		private void SaveFile_Click(object sender, RoutedEventArgs e)
 		{
 			SaveFileDialog sfd = new SaveFileDialog();
-			sfd.InitialDirectory = "C:\\Users\\tyler.miller\\Desktop" + "\\TESTFOLDER";
+			sfd.InitialDirectory = Environment.CurrentDirectory;
 			sfd.Filter = "BITMAP IMAGE | *.bmp|PNG IMAGE | *.png";
 			sfd.DefaultExt = "bmp";
 
@@ -96,7 +97,7 @@ namespace SpritePacker
 		private void ImportBatch_Click(object sender, RoutedEventArgs e)
 		{
 			OpenFileDialog opf = new OpenFileDialog();
-			opf.InitialDirectory = "C:\\Users\\tyler.miller\\Desktop" + "\\TESTFOLDER";
+			opf.InitialDirectory = Environment.CurrentDirectory;
 			opf.Filter = "ALL FILES (*.*)|*.*|PNG IMAGES (*.png)|*.png|BITMAP IMAGES (*.bmp)|*.bmp|COMPUSERVE GIF (*.gif)|*.gif";
 			opf.FilterIndex = 1;
 			opf.Multiselect = true;
