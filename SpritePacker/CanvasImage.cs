@@ -9,13 +9,15 @@ namespace SpritePacker
 {
 	class CanvasImage
 	{
+		public string mMemberName;
 		public int mWidth;
 		public int mHeight;
 		public int mX;
 		public int mY;
 
-		public CanvasImage(double tWidth, double tHeight, int tX, int tY)
+		public CanvasImage(string tMemberName, double tWidth, double tHeight, int tX, int tY)
 		{
+			mMemberName = tMemberName;
 			mWidth = (int)tWidth;
 			mHeight = (int)tHeight;
 			mX = tX;

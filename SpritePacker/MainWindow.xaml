@@ -8,6 +8,7 @@
 		<Button x:Name="MoveToCanvas" Content="Add To Canvas" HorizontalAlignment="Left" Margin="750,282,0,0" VerticalAlignment="Top" Width="150" Click="MoveToCanvas_Click"/>
 		<Button x:Name="ImportFile" Content="Import File..." HorizontalAlignment="Left" Margin="750,255,0,0" VerticalAlignment="Top" Width="150" Click="ImportFile_Click"/>
 		<Button x:Name="SaveFile" Content="Save as..." HorizontalAlignment="Left" Margin="750,309,0,0" VerticalAlignment="Top" Width="150" Click="SaveFile_Click"/>
+		<Button x:Name="ImportBatch" Content="Import and Add Multiple..." HorizontalAlignment="Left" Margin="905,255,0,0" VerticalAlignment="Top" Width="150" Click="ImportBatch_Click"/>
 
 	</Grid>
 </Window>

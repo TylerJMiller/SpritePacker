@@ -19,11 +19,12 @@ namespace SpritePacker
 
 	class SpriteSheet
 	{
-		Employee[] employees = new Employee[4];
-		public List<CanvasImage> mCanvasImages;
-		public Canvas mCanvas;
-		public int mDrawX;
-		public int mDrawY;
+		List<CanvasImage> mCanvasImages;
+		Canvas mCanvas;
+		int mDrawX;
+		int mDrawY;
+		int mNextLineY;
+
 		public SpriteSheet(Canvas tCanvas)
 		{
 			mCanvas = tCanvas;
@@ -32,15 +33,30 @@ namespace SpritePacker
 			mCanvasImages = new List<CanvasImage>();
 		}
 
-		public void AddImage(string tImageSource)
+		//checks if given image can fit on canvas
+		//if not true then outputs error and returns
+		//if true then adds image to canvas and adds new CanvasImage to mCanvasImages list
+		public void AddImage(string tImageSource)	
 		{
 
 			Image tImage = new Image();
 			tImage.Source = new BitmapImage(new Uri(tImageSource));
+
+			if (mDrawY + (int)tImage.Source.Height > mCanvas.Height)
+			{
+				Console.WriteLine("Failed to add image: Canvas is full");
+				return;
+			}
+			if ((int)tImage.Source.Height + mDrawY > mNextLineY)
+			{
+				mNextLineY = mDrawY + (int)tImage.Source.Height;
+			}
+
 			if (mDrawX + (int)tImage.Source.Width > mCanvas.Width)
 			{
 				mDrawX = 0;
-				mDrawY += (int)tImage.Source.Height;
+				mDrawY = mNextLineY;
+				mNextLineY = 0;
 			}
 			if (mDrawY + (int)tImage.Source.Height > mCanvas.Height)
 			{
@@ -50,12 +66,13 @@ namespace SpritePacker
 			Canvas.SetTop(tImage, mDrawY);
 			Canvas.SetLeft(tImage, mDrawX);
 			mCanvas.Children.Add(tImage);
-			mCanvasImages.Add(new CanvasImage(tImage.Source.Width, tImage.Source.Height, mDrawX, mDrawY));
+			string tFileName = tImageSource.Substring(tImageSource.LastIndexOf("/") + 1, tImageSource.LastIndexOf(".") - tImageSource.LastIndexOf("/") - 1);
+			mCanvasImages.Add(new CanvasImage(tImageSource.Substring(tImageSource.LastIndexOf("/") + 1, tImageSource.LastIndexOf(".") - tImageSource.LastIndexOf("/") - 1), tImage.Source.Width, tImage.Source.Height, mDrawX, mDrawY));
 			Console.WriteLine("Image Added");
 			mDrawX += (int)tImage.Source.Width;
-			//mDrawY += (int)tImage.Source.Height;
 		}
 
+		//outputs canvas as png/bmp to given directory then outputs xml representation to same directory
 		public void ExportCanvas(string tFileFull)
 		{
 			string tFileDir = tFileFull.Substring(0, tFileFull.LastIndexOf("\\") + 1);
@@ -74,34 +91,6 @@ namespace SpritePacker
 				tEncoder.Frames.Add(BitmapFrame.Create(tRenderBitmap));
 				tEncoder.Save(tOutStream);
 				Console.WriteLine("Saved " + tOutStream.Name.Substring(tOutStream.Name.LastIndexOf("\\") + 1) + " at " + tOutStream.Name.Substring(0, tOutStream.Name.LastIndexOf("\\") + 1));
-
-				/*int tCount = tOutStream.Name.Count();
-				int tStartIndex = tOutStream.Name.LastIndexOf("\\") + 1;
-				int tSubLength = tOutStream.Name.Count() - (tOutStream.Name.LastIndexOf("\\") + 1) - 4;
-				string testa = tOutStream.Name.Substring(tStartIndex,tSubLength) +".xml";
-				*/
-
-				/*
-				XmlWriterSettings tXMLSettings = new XmlWriterSettings();
-				tXMLSettings.Indent = true;
-				//tXMLSettings.OutputMethod 
-				using (XmlWriter tXML = XmlWriter.Create(tOutStream.Name.Substring(tOutStream.Name.LastIndexOf("\\") + 1, tOutStream.Name.Count() - 3) + ".xml", tXMLSettings))
-				{
-					tXML.WriteStartDocument();
-					tXML.WriteStartElement("SpriteSheet");
-					foreach (CanvasImage tCanvasImage in mCanvasImages)
-					{
-						tXML.WriteStartElement("Sprite");
-						tXML.WriteElementString("X", tCanvasImage.mX.ToString());
-						tXML.WriteElementString("Y", tCanvasImage.mY.ToString());
-						tXML.WriteElementString("Width", tCanvasImage.mWidth.ToString());
-						tXML.WriteElementString("Height", tCanvasImage.mHeight.ToString());
-						tXML.WriteEndElement();
-					}
-					tXML.WriteEndElement();
-					tXML.WriteEndDocument();
-				}
-				*/
 			}
 			mCanvas.LayoutTransform = tTransform;
 			
@@ -109,18 +98,15 @@ namespace SpritePacker
 
 			XmlWriterSettings tXMLSettings = new XmlWriterSettings();
 			tXMLSettings.Indent = true;
-			//tXMLSettings.OutputMethod 
-			//using (XmlWriter tXML = XmlWriter.Create(tFileName.Substring(tFileName.LastIndexOf("\\") + 1, tFileName.Count() - 3) + ".xml", tXMLSettings))
 			using (XmlWriter tXML = XmlWriter.Create(tFileFull.Substring(0, tFileFull.LastIndexOf(".")) + ".xml", tXMLSettings))
 			{
-				//string testc = tFileFull.Substring(0, tFileFull.LastIndexOf(".")) + ".xml";
-
 				tXML.WriteStartDocument();
 				tXML.WriteStartElement("SpriteSheet");
 				tXML.WriteAttributeString("Filename", tFileName + tFileExt);
 				foreach (CanvasImage tCanvasImage in mCanvasImages)
 				{
 					tXML.WriteStartElement("Sprite");
+					tXML.WriteAttributeString("Name", tCanvasImage.mMemberName);
 					tXML.WriteAttributeString("Height", tCanvasImage.mHeight.ToString());
 					tXML.WriteAttributeString("Width", tCanvasImage.mWidth.ToString());
 					tXML.WriteAttributeString("Y", tCanvasImage.mY.ToString());
