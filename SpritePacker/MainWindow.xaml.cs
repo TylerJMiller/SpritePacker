@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace SpritePacker
 {
@@ -21,8 +22,15 @@ namespace SpritePacker
 		SpriteSheet CanvasManager;
 		public MainWindow()
 		{
-			InitializeComponent();
-			CanvasManager = new SpriteSheet(ViewCanvas);
+			try
+			{
+				InitializeComponent();
+				CanvasManager = new SpriteSheet(ViewCanvas);
+			}
+			catch (Exception)
+			{
+				
+			}
 		}
 		private void ImportFile_Click(object sender, RoutedEventArgs e)
 		{
@@ -39,9 +47,9 @@ namespace SpritePacker
 				{
 					PreviewImage.Source = new BitmapImage(new Uri(opf.FileName));
 				}
-				catch (System.NotSupportedException FUCKTHEUSER)
+				catch (Exception PLEASESTOP)
 				{
-					Console.WriteLine("UNHANDLED BUTTS: NOT A VALID IMAGE FILE: ", FUCKTHEUSER.Message);
+					Console.WriteLine("UNHANDLED BUTTS: NOT A VALID IMAGE FILE: ", PLEASESTOP.Message);
 				}
 			}
 		}
