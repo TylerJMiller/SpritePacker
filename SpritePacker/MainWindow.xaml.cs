@@ -40,8 +40,10 @@ namespace SpritePacker
 		private void ImportFile_Click(object sender, RoutedEventArgs e)
 		{
 			OpenFileDialog opf = new OpenFileDialog();
-			
 			opf.InitialDirectory = Environment.CurrentDirectory;
+#if DEBUG
+			opf.InitialDirectory = Environment.CurrentDirectory + @"..\..\testimg";
+#endif
 			opf.Filter = "ALL FILES (*.*)|*.*|PNG IMAGES (*.png)|*.png|BITMAP IMAGES (*.bmp)|*.bmp|COMPUSERVE GIF (*.gif)|*.gif";
 			opf.FilterIndex = 1;
 			opf.RestoreDirectory = true;
@@ -52,7 +54,6 @@ namespace SpritePacker
 				try
 				{
 					PreviewImage.Source = new BitmapImage(new Uri(opf.FileName));
-					string whatever = PreviewImage.Source.ToString();
 				}
 				catch (Exception PLEASESTOP)
 				{
@@ -69,7 +70,9 @@ namespace SpritePacker
 			if (null != PreviewImage.Source)
 				CanvasManager.AddImage(PreviewImage.Source.ToString());
 			else
+			{
 				Console.WriteLine("ERROR: IMAGE SELECT IS NULL");
+			}
 		}
 
 
@@ -78,6 +81,10 @@ namespace SpritePacker
 		{
 			SaveFileDialog sfd = new SaveFileDialog();
 			sfd.InitialDirectory = Environment.CurrentDirectory;
+#if DEBUG
+			sfd.InitialDirectory = Environment.CurrentDirectory + @"..\..\testimg";
+#endif
+
 			sfd.Filter = "BITMAP IMAGE | *.bmp|PNG IMAGE | *.png";
 			sfd.DefaultExt = "bmp";
 
@@ -87,7 +94,6 @@ namespace SpritePacker
 			{
 				CanvasManager.ExportCanvas(sfd.FileName);
 			}
-
 		}
 
 		//opens a multi-select file dialog
@@ -98,6 +104,9 @@ namespace SpritePacker
 		{
 			OpenFileDialog opf = new OpenFileDialog();
 			opf.InitialDirectory = Environment.CurrentDirectory;
+#if DEBUG
+			opf.InitialDirectory = Environment.CurrentDirectory + @"..\..\testimg";
+#endif
 			opf.Filter = "ALL FILES (*.*)|*.*|PNG IMAGES (*.png)|*.png|BITMAP IMAGES (*.bmp)|*.bmp|COMPUSERVE GIF (*.gif)|*.gif";
 			opf.FilterIndex = 1;
 			opf.Multiselect = true;
@@ -118,7 +127,6 @@ namespace SpritePacker
 					}
 				}
 			}
-
 		}
 	}
 }
